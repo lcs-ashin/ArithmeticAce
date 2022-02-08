@@ -9,7 +9,7 @@ import SwiftUI
 
 struct ContentView: View {
     var body: some View {
-        VStack {
+        VStack(spacing: 0) {
             HStack {
                 Image(systemName: "multiply")
                 
@@ -27,6 +27,7 @@ struct ContentView: View {
             
             HStack {
                 Image(systemName: "checkmark.circle")
+                    .foregroundColor(.green)
                 
                 Spacer()
                 
