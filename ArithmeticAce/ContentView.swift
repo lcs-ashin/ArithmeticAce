@@ -40,11 +40,22 @@ struct ContentView: View {
                 
                 Spacer()
                 
-                TextField("Enter a Product",
+                TextField("",
                           text: $inputGiven)
+                    .multilineTextAlignment(.trailing)
             }
             .font(.system(size: 70).bold())
             .padding(30)
+            
+            Button(action: {
+                // Check the answer
+            }, label: {
+                // Label
+                Text("Check Answer")
+                    .font(.largeTitle)
+            })
+                .buttonStyle(.bordered)
+                .padding()
         }
     }
 }
