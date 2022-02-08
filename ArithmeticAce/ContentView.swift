@@ -17,6 +17,10 @@ struct ContentView: View {
     @State var inputGiven = ""
     
     // MARK: Computed Properties
+    var correctAnswer: Int {
+        return multiplicand * multiplier
+    }
+    
     var body: some View {
         VStack(spacing: 0) {
             HStack {
@@ -48,7 +52,18 @@ struct ContentView: View {
             .padding(30)
             
             Button(action: {
+                // Guard statement to convert the input to an Int
+                guard let answerGiven = Int(inputGiven) else {
+                    // Input is invalid
+                    return
+                }
+                
                 // Check the answer
+                if answerGiven == correctAnswer {
+                    // Show the checkmark
+                } else {
+                    // Indicate this is the wrong answer
+                }
             }, label: {
                 // Label
                 Text("Check Answer")
