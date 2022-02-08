@@ -8,6 +8,13 @@
 import SwiftUI
 
 struct ContentView: View {
+    
+    // MARK: Stored Properties
+    let multiplicand = Int.random(in: 1...50)
+    let multiplier = Int.random(in: 1...50)
+    
+    // MARK: Computed Properties
+    
     var body: some View {
         VStack(spacing: 0) {
             HStack {
@@ -15,9 +22,9 @@ struct ContentView: View {
                 
                 Spacer()
                 
-                VStack {
-                    Text("5")
-                    Text("6")
+                VStack(alignment: .trailing) {
+                    Text("\(multiplicand)")
+                    Text("\(multiplier)")
                 }
             }
             .font(.system(size: 70).bold())
