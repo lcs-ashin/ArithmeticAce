@@ -13,8 +13,10 @@ struct ContentView: View {
     let multiplicand = Int.random(in: 1...50)
     let multiplier = Int.random(in: 1...50)
     
-    // MARK: Computed Properties
+    // Holds the user's input
+    @State var inputGiven = ""
     
+    // MARK: Computed Properties
     var body: some View {
         VStack(spacing: 0) {
             HStack {
@@ -38,7 +40,8 @@ struct ContentView: View {
                 
                 Spacer()
                 
-                Text("30")
+                TextField("Enter a Product",
+                          text: $inputGiven)
             }
             .font(.system(size: 70).bold())
             .padding(30)
