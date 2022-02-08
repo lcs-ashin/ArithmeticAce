@@ -16,6 +16,10 @@ struct ContentView: View {
     // Holds the user's input
     @State var inputGiven = ""
     
+    // Properties to track the state of an answer being provided
+    @State var answerProvided = false // Has an answer been provided?
+    @State var answerIsCorrect = false // Is the answer correct?
+    
     // MARK: Computed Properties
     var correctAnswer: Int {
         return multiplicand * multiplier
@@ -41,6 +45,9 @@ struct ContentView: View {
             HStack {
                 Image(systemName: "checkmark.circle")
                     .foregroundColor(.green)
+                // Only show when the answer is correct
+                //          CONDITION       ture false
+                    .opacity(answerIsCorrect ? 1.0 : 0.0)
                 
                 Spacer()
                 
@@ -55,14 +62,19 @@ struct ContentView: View {
                 // Guard statement to convert the input to an Int
                 guard let answerGiven = Int(inputGiven) else {
                     // Input is invalid
+                    answerProvided = true
+                    answerIsCorrect = false
                     return
                 }
                 
                 // Check the answer
+                answerProvided = true
                 if answerGiven == correctAnswer {
                     // Show the checkmark
+                    answerIsCorrect = true
                 } else {
                     // Indicate this is the wrong answer
+                    answerIsCorrect = false
                 }
             }, label: {
                 // Label
