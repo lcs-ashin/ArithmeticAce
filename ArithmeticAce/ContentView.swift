@@ -68,34 +68,50 @@ struct ContentView: View {
             .font(.system(size: 70).bold())
             .padding(30)
             
-            Button(action: {
-                // Guard statement to convert the input to an Int
-                guard let answerGiven = Int(inputGiven) else {
-                    // Input is invalid
+            ZStack {
+                // Check Answer
+                Button(action: {
+                    // Guard statement to convert the input to an Int
+                    guard let answerGiven = Int(inputGiven) else {
+                        // Input is invalid
+                        answerProvided = true
+                        answerIsCorrect = false
+                        answerIsIncorrect = false
+                        return
+                    }
+                    
+                    // Check the answer
                     answerProvided = true
-                    answerIsCorrect = false
-                    answerIsIncorrect = false
-                    return
-                }
+                    if answerGiven == correctAnswer {
+                        // Show the checkmark
+                        answerIsCorrect = true
+                        answerIsIncorrect = false
+                    } else {
+                        // Indicate this is the wrong answer
+                        answerIsCorrect = false
+                        answerIsIncorrect = true
+                    }
+                }, label: {
+                    // Label
+                    Text("Check Answer")
+                        .font(.largeTitle)
+                })
+                    .opacity(answerIsCorrect ? 0.0 : 1.0)
                 
-                // Check the answer
-                answerProvided = true
-                if answerGiven == correctAnswer {
-                    // Show the checkmark
-                    answerIsCorrect = true
-                    answerIsIncorrect = false
-                } else {
-                    // Indicate this is the wrong answer
-                    answerIsCorrect = false
-                    answerIsIncorrect = true 
-                }
-            }, label: {
-                // Label
-                Text("Check Answer")
-                    .font(.largeTitle)
-            })
-                .buttonStyle(.bordered)
-                .padding()
+                // New Question
+                Button(action: {
+                    multiplicand = Int.random(in: 1...50)
+                    multiplier = Int.random(in: 1...50)
+                }, label: {
+                    // Label
+                    Text("New Question")
+                        .font(.largeTitle)
+                })
+                    .opacity(answerIsCorrect ? 1.0 : 0.0)
+            }
+            .buttonStyle(.bordered)
+            .padding()
+            
         }
     }
 }
