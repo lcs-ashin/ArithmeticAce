@@ -10,8 +10,8 @@ import SwiftUI
 struct ContentView: View {
     
     // MARK: Stored Properties
-    let multiplicand = Int.random(in: 1...50)
-    let multiplier = Int.random(in: 1...50)
+    @State var multiplicand = Int.random(in: 1...50)
+    @State var multiplier = Int.random(in: 1...50)
     
     // Holds the user's input
     @State var inputGiven = ""
@@ -43,12 +43,21 @@ struct ContentView: View {
             Divider()
             
             HStack {
-                Image(systemName: "checkmark.circle")
-                    .foregroundColor(.green)
-                // Only show when the answer is correct
-                //          CONDITION       ture false
-                    .opacity(answerIsCorrect ? 1.0 : 0.0)
                 
+                ZStack {
+                    Image(systemName: "checkmark.circle")
+                        .foregroundColor(.green)
+                    // Only show when the answer is correct
+                    //          CONDITION       ture false
+                        .opacity(answerIsCorrect ? 1.0 : 0.0)
+                    
+                    Image(systemName: "x.square")
+                        .foregroundColor(.red)
+                    // Only show when the answer is incorrect
+                    //          CONDITION       false true
+                        .opacity(answerIsCorrect ? 0.0 : 1.0)
+                }
+               
                 Spacer()
                 
                 TextField("",
