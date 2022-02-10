@@ -19,6 +19,7 @@ struct ContentView: View {
     // Properties to track the state of an answer being provided
     @State var answerProvided = false // Has an answer been provided?
     @State var answerIsCorrect = false // Is the answer correct?
+    @State var answerIsIncorrect = false
     
     // MARK: Computed Properties
     var correctAnswer: Int {
@@ -55,7 +56,7 @@ struct ContentView: View {
                         .foregroundColor(.red)
                     // Only show when the answer is incorrect
                     //          CONDITION       false true
-                        .opacity(answerIsCorrect ? 0.0 : 1.0)
+                        .opacity(answerIsIncorrect ? 1.0 : 0.0)
                 }
                
                 Spacer()
@@ -73,6 +74,7 @@ struct ContentView: View {
                     // Input is invalid
                     answerProvided = true
                     answerIsCorrect = false
+                    answerIsIncorrect = false
                     return
                 }
                 
@@ -81,9 +83,11 @@ struct ContentView: View {
                 if answerGiven == correctAnswer {
                     // Show the checkmark
                     answerIsCorrect = true
+                    answerIsIncorrect = false
                 } else {
                     // Indicate this is the wrong answer
                     answerIsCorrect = false
+                    answerIsIncorrect = true 
                 }
             }, label: {
                 // Label
